@@ -75,7 +75,7 @@
             #{id}
         </foreach>
     </update>
-    <select id="findNewBeeMallGoodsList" parameterType="Map" resultMap="BaseResultMap">
+    <select id="findMallGoodsList" parameterType="Map" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from tb_newbee_mall_goods_info
@@ -164,7 +164,7 @@
         </foreach>
         );
     </select>
-    <select id="getTotalNewBeeMallGoods" parameterType="Map" resultType="int">
+    <select id="getTotalMallGoods" parameterType="Map" resultType="int">
         select count(*) from tb_newbee_mall_goods_info
         <where>
             <if test="goodsName!=null and goodsName!=''">

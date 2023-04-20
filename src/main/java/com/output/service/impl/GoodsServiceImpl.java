@@ -20,7 +20,10 @@ public class GoodsServiceImpl implements GoodsService {
 
     @Override
     public PageResult getGoodsPage(PageQueryUtil pageUtil) {
-        return null;
+        List<MallGoods> goodsList = goodsMapper.findMallGoodsList(pageUtil);
+        int total = goodsMapper.getTotalMallGoods(pageUtil);
+        PageResult pageResult = new PageResult(goodsList, total, pageUtil.getLimit(), pageUtil.getPage());
+        return pageResult;
     }
 
     @Override

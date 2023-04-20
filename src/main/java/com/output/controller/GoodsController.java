@@ -2,22 +2,25 @@
 package com.output.controller;
 
 import com.output.common.Constants;
+import com.output.common.IndexConfigTypeEnum;
 import com.output.common.ServiceResultEnum;
 import com.output.controller.vo.GoodsDetailVO;
 import com.output.entity.MallGoods;
 import com.output.service.GoodsService;
 import com.output.util.BeanUtil;
+import com.output.util.PageQueryUtil;
 import com.output.util.Result;
+import com.output.util.ResultGenerator;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.util.CollectionUtils;
+import org.springframework.util.ObjectUtils;
+import org.springframework.web.bind.annotation.*;
 
 import com.output.common.Exception;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -26,10 +29,14 @@ public class GoodsController {
     @Resource
     private GoodsService goodsService;
 
-    @GetMapping("/goods")
+    @RequestMapping(value = "/goods/list", method = RequestMethod.GET)
     @ResponseBody
-    public String goods(){
-        return("yes");
+    public Result list(@RequestParam Map<String, Object> params) {
+        if (ObjectUtils.isEmpty(params.get("page")) || ObjectUtils.isEmpty(params.get("limit"))) {
+            return ResultGenerator.genFailResult("参数异常！");
+        }
+        PageQueryUtil pageUtil = new PageQueryUtil(params);
+        return ResultGenerator.genSuccessResult(goodsService.getGoodsPage(pageUtil));
     }
 
     @GetMapping("/goods/detail/{goodsId}")
