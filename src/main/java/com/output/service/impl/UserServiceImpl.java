@@ -8,8 +8,10 @@ import com.output.entity.User;
 import com.output.service.UserService;
 import com.output.util.BeanUtil;
 import com.output.util.MD5Util;
+import com.output.util.OtherUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import javax.servlet.http.HttpSession;
 
@@ -36,11 +38,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String login(String loginName, String passwordMD5, HttpSession httpSession) {
+    public UserVO login(String loginName, String passwordMD5, HttpSession httpSession) {
         User user = userMapper.selectByLoginNameAndPasswd(loginName, passwordMD5);
         if (user != null && httpSession != null) {
             if (user.getLockedFlag() == 1) {
-                return ServiceResultEnum.LOGIN_USER_LOCKED.getResult();
+//                return ServiceResultEnum.LOGIN_USER_LOCKED.getResult();
+                return null;
             }
             //昵称太长 影响页面展示
             if (user.getNickName() != null && user.getNickName().length() > 7) {
@@ -51,8 +54,33 @@ public class UserServiceImpl implements UserService {
             BeanUtil.copyProperties(user, newUserVO);
             //设置购物车中的数量
             httpSession.setAttribute(Constants.MALL_USER_SESSION_KEY, newUserVO);
-            return ServiceResultEnum.SUCCESS.getResult();
+//            return ServiceResultEnum.SUCCESS.getResult();
+            return newUserVO;
+
         }
-        return ServiceResultEnum.LOGIN_ERROR.getResult();
+//        return ServiceResultEnum.LOGIN_ERROR.getResult();
+        return null;
+    }
+
+    @Override
+    public UserVO updateUserInfo(User userInfo) {
+        User userFromDB = userMapper.selectByPrimaryKey(userInfo.getUserId());
+        if (userFromDB != null) {
+            if (StringUtils.hasText(userInfo.getNickName())) {
+                userFromDB.setNickName(OtherUtils.cleanString(userInfo.getNickName()));
+            }
+            if (StringUtils.hasText(userInfo.getAddress())) {
+                userFromDB.setAddress(OtherUtils.cleanString(userInfo.getAddress()));
+            }
+            if (StringUtils.hasText(userInfo.getIntroduceSign())) {
+                userFromDB.setIntroduceSign(OtherUtils.cleanString(userInfo.getIntroduceSign()));
+            }
+            if (userMapper.updateByPrimaryKeySelective(userFromDB) > 0) {
+                UserVO UserVO = new UserVO();
+                BeanUtil.copyProperties(userFromDB, UserVO);
+                return UserVO;
+            }
+        }
+        return null;
     }
 }

@@ -1,7 +1,7 @@
 
 package com.output.dao;
 
-import com.output.entity.MallGoods;
+import com.output.entity.Goods;
 import com.output.util.PageQueryUtil;
 import org.apache.ibatis.annotations.Param;
 
@@ -10,31 +10,31 @@ import java.util.List;
 public interface GoodsMapper {
     int deleteByPrimaryKey(Long goodsId);
 
-    int insert(MallGoods record);
+    int insert(Goods record);
 
-    int insertSelective(MallGoods record);
+    int insertSelective(Goods record);
 
-    MallGoods selectByPrimaryKey(Long goodsId);
+    Goods selectByPrimaryKey(Long goodsId);
 
-    MallGoods selectByCategoryIdAndName(@Param("goodsName") String goodsName, @Param("goodsCategoryId") Long goodsCategoryId);
+    Goods selectByCategoryIdAndName(@Param("goodsName") String goodsName, @Param("goodsCategoryId") Long goodsCategoryId);
 
-    int updateByPrimaryKeySelective(MallGoods record);
+    int updateByPrimaryKeySelective(Goods record);
 
-    int updateByPrimaryKeyWithBLOBs(MallGoods record);
+    int updateByPrimaryKeyWithBLOBs(Goods record);
 
-    int updateByPrimaryKey(MallGoods record);
+    int updateByPrimaryKey(Goods record);
 
-    List<MallGoods> findMallGoodsList(PageQueryUtil pageUtil);
+    List<Goods> findMallGoodsList(PageQueryUtil pageUtil);
 
     int getTotalMallGoods(PageQueryUtil pageUtil);
 
-    List<MallGoods> selectByPrimaryKeys(List<Long> goodsIds);
+    List<Goods> selectByPrimaryKeys(List<Long> goodsIds);
 
-    List<MallGoods> findMallGoodsListBySearch(PageQueryUtil pageUtil);
+    List<Goods> findGoodsListBySearch(PageQueryUtil pageUtil);
 
-    int getTotalMallGoodsBySearch(PageQueryUtil pageUtil);
+    int getTotalGoodsBySearch(PageQueryUtil pageUtil);
 
-    int batchInsert(@Param("MallGoodsList") List<MallGoods> MallGoodsList);
+    int batchInsert(@Param("MallGoodsList") List<Goods> goodsList);
 
 //    int updateStockNum(@Param("stockNumDTOS") List<StockNumDTO> stockNumDTOS);
 //

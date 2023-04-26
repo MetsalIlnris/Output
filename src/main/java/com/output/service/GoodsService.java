@@ -1,6 +1,6 @@
 package com.output.service;
 
-import com.output.entity.MallGoods;
+import com.output.entity.Goods;
 import com.output.util.PageQueryUtil;
 import com.output.util.PageResult;
 
@@ -21,15 +21,15 @@ public interface GoodsService {
      * @param goods
      * @return
      */
-    String saveGoods(MallGoods goods);
+    String saveGoods(Goods goods);
 
     /**
      * 批量新增商品数据
      *
-     * @param newBeeMallGoodsList
+     * @param newBeeGoodsList
      * @return
      */
-    void batchSaveGoods(List<MallGoods> newBeeMallGoodsList);
+    void batchSaveGoods(List<Goods> newBeeGoodsList);
 
     /**
      * 修改商品信息
@@ -37,7 +37,7 @@ public interface GoodsService {
      * @param goods
      * @return
      */
-    String updateGoods(MallGoods goods);
+    String updateGoods(Goods goods);
 
     /**
      * 获取商品详情
@@ -45,7 +45,7 @@ public interface GoodsService {
      * @param id
      * @return
      */
-    MallGoods getGoodsById(Long id);
+    Goods getGoodsById(Long id);
 
     /**
      * 批量修改销售状态(上架下架)

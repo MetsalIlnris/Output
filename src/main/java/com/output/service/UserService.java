@@ -1,6 +1,9 @@
 package com.output.service;
 
 
+import com.output.controller.vo.UserVO;
+import com.output.entity.User;
+
 import javax.servlet.http.HttpSession;
 
 public interface UserService {
@@ -21,6 +24,7 @@ public interface UserService {
      * @param httpSession
      * @return
      */
-    String login(String loginName, String passwordMD5, HttpSession httpSession);
+    UserVO login(String loginName, String passwordMD5, HttpSession httpSession);
 
+    UserVO updateUserInfo(User userInfo);
 }

@@ -19,27 +19,27 @@
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        from tb_newbee_mall_user
+        from output_user
         where user_id = #{userId,jdbcType=BIGINT} and is_deleted = 0
     </select>
     <select id="selectByLoginName" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        from tb_newbee_mall_user
+        from output_user
         where login_name = #{loginName} and is_deleted = 0
     </select>
     <select id="selectByLoginNameAndPasswd" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        from tb_newbee_mall_user
+        from output_user
         where login_name = #{loginName} and password_md5 = #{password} and is_deleted = 0
     </select>
     <update id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    update tb_newbee_mall_user set is_deleted = 1
+    update output_user set is_deleted = 1
     where user_id = #{userId,jdbcType=BIGINT} and is_deleted = 0
   </update>
     <insert id="insert" parameterType="com.output.entity.User">
-    insert into tb_newbee_mall_user (user_id, nick_name, login_name, 
+    insert into output_user (user_id, nick_name, login_name, 
       password_md5, introduce_sign, address, 
       is_deleted, locked_flag, create_time
       )
@@ -49,7 +49,7 @@
       )
   </insert>
     <insert id="insertSelective" parameterType="com.output.entity.User">
-        insert into tb_newbee_mall_user
+        insert into output_user
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="userId != null">
                 user_id,
@@ -110,7 +110,7 @@
         </trim>
     </insert>
     <update id="updateByPrimaryKeySelective" parameterType="com.output.entity.User">
-        update tb_newbee_mall_user
+        update output_user
         <set>
             <if test="nickName != null">
                 nick_name = #{nickName,jdbcType=VARCHAR},
@@ -140,7 +140,7 @@
         where user_id = #{userId,jdbcType=BIGINT}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.output.entity.User">
-    update tb_newbee_mall_user
+    update output_user
     set nick_name = #{nickName,jdbcType=VARCHAR},
       login_name = #{loginName,jdbcType=VARCHAR},
       password_md5 = #{passwordMd5,jdbcType=VARCHAR},
@@ -152,7 +152,7 @@
     where user_id = #{userId,jdbcType=BIGINT}
   </update>
     <update id="lockUserBatch">
-        update tb_newbee_mall_user
+        update output_user
         set locked_flag=#{lockStatus} where user_id in
         <foreach item="id" collection="ids" open="(" separator="," close=")">
             #{id}
