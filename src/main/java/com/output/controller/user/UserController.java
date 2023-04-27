@@ -1,4 +1,4 @@
-package com.output.controller;
+package com.output.controller.user;
 import cn.hutool.captcha.CaptchaUtil;
 import cn.hutool.captcha.ShearCaptcha;
 import com.output.common.Constants;

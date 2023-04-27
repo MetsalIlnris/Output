@@ -2,6 +2,7 @@
 package com.output.dao;
 
 import com.output.entity.Goods;
+import com.output.entity.StockNumDTO;
 import com.output.util.PageQueryUtil;
 import org.apache.ibatis.annotations.Param;
 
@@ -36,9 +37,9 @@ public interface GoodsMapper {
 
     int batchInsert(@Param("MallGoodsList") List<Goods> goodsList);
 
-//    int updateStockNum(@Param("stockNumDTOS") List<StockNumDTO> stockNumDTOS);
-//
-//    int recoverStockNum(@Param("stockNumDTOS") List<StockNumDTO> stockNumDTOS);
+    int updateStockNum(@Param("stockNumDTOS") List<StockNumDTO> stockNumDTOS);
+
+    int recoverStockNum(@Param("stockNumDTOS") List<StockNumDTO> stockNumDTOS);
 
     int batchUpdateSellStatus(@Param("orderIds")Long[] orderIds,@Param("sellStatus") int sellStatus);
 

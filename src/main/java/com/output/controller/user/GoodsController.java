@@ -1,5 +1,5 @@
 
-package com.output.controller;
+package com.output.controller.user;
 
 import com.output.common.Constants;
 import com.output.common.ServiceResultEnum;

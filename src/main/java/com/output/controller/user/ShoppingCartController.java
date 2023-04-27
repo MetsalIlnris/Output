@@ -1,4 +1,4 @@
-package com.output.controller;
+package com.output.controller.user;
 import com.output.common.ServiceResultEnum;
 import com.output.controller.vo.ShoppingCartItemVO;
 import com.output.entity.ShoppingCartItem;
