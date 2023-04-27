@@ -38,9 +38,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserVO login(String loginName, String passwordMD5, HttpSession httpSession) {
+    public UserVO login(String loginName, String passwordMD5) {
         User user = userMapper.selectByLoginNameAndPasswd(loginName, passwordMD5);
-        if (user != null && httpSession != null) {
+        if (user != null ) {
             if (user.getLockedFlag() == 1) {
 //                return ServiceResultEnum.LOGIN_USER_LOCKED.getResult();
                 return null;
@@ -53,8 +53,7 @@ public class UserServiceImpl implements UserService {
             UserVO newUserVO = new UserVO();
             BeanUtil.copyProperties(user, newUserVO);
             //设置购物车中的数量
-            httpSession.setAttribute(Constants.MALL_USER_SESSION_KEY, newUserVO);
-//            return ServiceResultEnum.SUCCESS.getResult();
+//            httpSession.setAttribute(Constants.MALL_USER_SESSION_KEY, newUserVO);
             return newUserVO;
 
         }

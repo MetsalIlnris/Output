@@ -21,10 +21,9 @@ public interface UserService {
      *
      * @param loginName
      * @param passwordMD5
-     * @param httpSession
      * @return
      */
-    UserVO login(String loginName, String passwordMD5, HttpSession httpSession);
+    UserVO login(String loginName, String passwordMD5);
 
     UserVO updateUserInfo(User userInfo);
 }

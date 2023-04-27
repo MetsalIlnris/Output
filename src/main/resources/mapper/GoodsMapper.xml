@@ -7,7 +7,6 @@
         <result column="goods_intro" jdbcType="VARCHAR" property="goodsIntro"/>
         <result column="goods_category_id" jdbcType="BIGINT" property="goodsCategoryId"/>
         <result column="goods_cover_img" jdbcType="VARCHAR" property="goodsCoverImg"/>
-        <result column="goods_carousel" jdbcType="VARCHAR" property="goodsCarousel"/>
         <result column="original_price" jdbcType="INTEGER" property="originalPrice"/>
         <result column="selling_price" jdbcType="INTEGER" property="sellingPrice"/>
         <result column="stock_num" jdbcType="INTEGER" property="stockNum"/>
@@ -22,7 +21,7 @@
         <result column="goods_detail_content" jdbcType="LONGVARCHAR" property="goodsDetailContent"/>
     </resultMap>
     <sql id="Base_Column_List">
-    goods_id, goods_name, goods_intro,goods_category_id, goods_cover_img, goods_carousel, original_price,
+    goods_id, goods_name, goods_intro,goods_category_id, goods_cover_img, original_price,
     selling_price, stock_num, tag, goods_sell_status, create_user, create_time, update_user, 
     update_time
   </sql>
@@ -32,12 +31,11 @@
 
     <insert id="batchInsert">
         INSERT INTO output_goods_info(goods_name, goods_intro, goods_category_id,goods_cover_img,
-        goods_carousel,
         goods_detail_content,original_price,
         selling_price, stock_num)
         VALUES
         <foreach collection="newBeeGoodsList" item="goods" separator=",">
-            (#{goods.goodsName},#{goods.goodsIntro},#{goods.goodsCategoryId},#{goods.goodsCoverImg},#{goods.goodsCarousel},#{goods.goodsDetailContent},#{goods.originalPrice},#{goods.sellingPrice},#{goods.stockNum})
+            (#{goods.goodsName},#{goods.goodsIntro},#{goods.goodsCategoryId},#{goods.goodsCoverImg},#{goods.goodsDetailContent},#{goods.originalPrice},#{goods.sellingPrice},#{goods.stockNum})
         </foreach>
     </insert>
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
@@ -187,13 +185,13 @@
   </delete>
     <insert id="insert" parameterType="com.output.entity.Goods">
     insert into output_goods_info (goods_id, goods_name, goods_intro, 
-      goods_cover_img, goods_carousel, original_price, 
+      goods_cover_img, original_price,
       selling_price, stock_num, tag, 
       goods_sell_status, create_user, create_time, 
       update_user, update_time, goods_detail_content
       )
     values (#{goodsId,jdbcType=BIGINT}, #{goodsName,jdbcType=VARCHAR}, #{goodsIntro,jdbcType=VARCHAR}, 
-      #{goodsCoverImg,jdbcType=VARCHAR}, #{goodsCarousel,jdbcType=VARCHAR}, #{originalPrice,jdbcType=INTEGER}, 
+      #{goodsCoverImg,jdbcType=VARCHAR}, #{originalPrice,jdbcType=INTEGER},
       #{sellingPrice,jdbcType=INTEGER}, #{stockNum,jdbcType=INTEGER}, #{tag,jdbcType=VARCHAR}, 
       #{goodsSellStatus,jdbcType=TINYINT}, #{createUser,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
       #{updateUser,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP}, #{goodsDetailContent,jdbcType=LONGVARCHAR}
@@ -216,9 +214,6 @@
             </if>
             <if test="goodsCoverImg != null">
                 goods_cover_img,
-            </if>
-            <if test="goodsCarousel != null">
-                goods_carousel,
             </if>
             <if test="originalPrice != null">
                 original_price,
@@ -267,9 +262,6 @@
             <if test="goodsCoverImg != null">
                 #{goodsCoverImg,jdbcType=VARCHAR},
             </if>
-            <if test="goodsCarousel != null">
-                #{goodsCarousel,jdbcType=VARCHAR},
-            </if>
             <if test="originalPrice != null">
                 #{originalPrice,jdbcType=INTEGER},
             </if>
@@ -317,9 +309,6 @@
             <if test="goodsCoverImg != null">
                 goods_cover_img = #{goodsCoverImg,jdbcType=VARCHAR},
             </if>
-            <if test="goodsCarousel != null">
-                goods_carousel = #{goodsCarousel,jdbcType=VARCHAR},
-            </if>
             <if test="originalPrice != null">
                 original_price = #{originalPrice,jdbcType=INTEGER},
             </if>
@@ -358,7 +347,6 @@
     set goods_name = #{goodsName,jdbcType=VARCHAR},
       goods_intro = #{goodsIntro,jdbcType=VARCHAR},
       goods_cover_img = #{goodsCoverImg,jdbcType=VARCHAR},
-      goods_carousel = #{goodsCarousel,jdbcType=VARCHAR},
       original_price = #{originalPrice,jdbcType=INTEGER},
       selling_price = #{sellingPrice,jdbcType=INTEGER},
       stock_num = #{stockNum,jdbcType=INTEGER},
@@ -376,7 +364,6 @@
     set goods_name = #{goodsName,jdbcType=VARCHAR},
       goods_intro = #{goodsIntro,jdbcType=VARCHAR},
       goods_cover_img = #{goodsCoverImg,jdbcType=VARCHAR},
-      goods_carousel = #{goodsCarousel,jdbcType=VARCHAR},
       original_price = #{originalPrice,jdbcType=INTEGER},
       selling_price = #{sellingPrice,jdbcType=INTEGER},
       stock_num = #{stockNum,jdbcType=INTEGER},
