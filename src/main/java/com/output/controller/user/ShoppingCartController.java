@@ -2,7 +2,6 @@ package com.output.controller.user;
 import com.output.common.ServiceResultEnum;
 import com.output.controller.vo.ShoppingCartItemVO;
 import com.output.entity.ShoppingCartItem;
-import com.output.entity.User;
 import com.output.service.ShoppingCartService;
 import com.output.util.Result;
 import com.output.util.ResultGenerator;
@@ -46,6 +45,7 @@ public class ShoppingCartController {
         Result result = ResultGenerator.genSuccessResult(myShoppingCartItems);
         return result;
     }
+
 
     @PostMapping("/cart/save")
     @ResponseBody

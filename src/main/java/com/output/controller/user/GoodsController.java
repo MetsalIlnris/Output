@@ -4,6 +4,7 @@ package com.output.controller.user;
 import com.output.common.Constants;
 import com.output.common.ServiceResultEnum;
 import com.output.controller.vo.GoodsDetailVO;
+import com.output.controller.vo.SearchPageCategoryVO;
 import com.output.entity.Goods;
 import com.output.service.CategoryService;
 import com.output.service.GoodsService;
@@ -43,7 +44,7 @@ public class GoodsController {
 
     @GetMapping("/goods/detail/{goodsId}")
     @ResponseBody
-    public GoodsDetailVO detailPage(@PathVariable("goodsId") Long goodsId, HttpServletRequest request) {
+    public Result detailPage(@PathVariable("goodsId") Long goodsId, HttpServletRequest request) {
         if (goodsId < 1) {
             Exception.fail("参数异常");
         }
@@ -53,10 +54,7 @@ public class GoodsController {
         }
         GoodsDetailVO goodsDetailVO = new GoodsDetailVO();
         BeanUtil.copyProperties(goods, goodsDetailVO);
-//        goodsDetailVO.setGoodsCarouselList(goods.getGoodsCarousel().split(","));
-        Result<GoodsDetailVO> res=new Result<>(1,"success");
-        res.setData(goodsDetailVO);
-        return goodsDetailVO;
+        return ResultGenerator.genSuccessResult(goodsDetailVO);
     }
 
     @GetMapping({"/search"})
@@ -66,19 +64,6 @@ public class GoodsController {
             params.put("page", 1);
         }
         params.put("limit", Constants.GOODS_SEARCH_PAGE_LIMIT);
-        //封装分类数据
-//        if (params.containsKey("goodsCategoryId") && StringUtils.hasText(params.get("goodsCategoryId") + "")) {
-//            Long categoryId = Long.valueOf(params.get("goodsCategoryId") + "");
-//            SearchPageCategoryVO searchPageCategoryVO = categoryService.getCategoriesForSearch(categoryId);
-//            if (searchPageCategoryVO != null) {
-//                request.setAttribute("goodsCategoryId", categoryId);
-//                request.setAttribute("searchPageCategoryVO", searchPageCategoryVO);
-//            }
-//        }
-        //封装参数供前端回显
-        if (params.containsKey("orderBy") && StringUtils.hasText(params.get("orderBy") + "")) {
-            request.setAttribute("orderBy", params.get("orderBy") + "");
-        }
         String keyword = "";
         //对keyword做过滤 去掉空格
         if (params.containsKey("keyword") && StringUtils.hasText((params.get("keyword") + "").trim())) {
