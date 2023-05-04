@@ -10,9 +10,13 @@ public interface NewsMapper {
 
     int insert(News record);
 
+    int insertSelective(News record);
+
     News selectByPrimaryKey(Long newsId);
 
     int updateByPrimaryKey(News record);
+
+    int updateByPrimaryKeySelective(News record);
 
     int getTotalNews(PageQueryUtil pageUtil);
 

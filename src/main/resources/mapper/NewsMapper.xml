@@ -64,17 +64,90 @@
                 #{updateTime,jdbcType=TIMESTAMP}, #{newsContent,jdbcType=LONGVARCHAR}
                )
     </insert>
-    <update id="updateByPrimaryKey" parameterType="com.output.entity.News">
+    <insert id="insertSelective" parameterType="com.output.entity.News">
+        insert into output_news
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="newsId != null">
+                news_id,
+            </if>
+            <if test="newsTitle != null">
+                news_title,
+            </if>
+            <if test="newsCoverImg != null">
+                news_cover_img,
+            </if>
+            <if test="tag != null">
+                tag,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="newsContent != null">
+                news_content,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="newsId != null">
+                #{newsId,jdbcType=BIGINT},
+            </if>
+            <if test="newsTitle != null">
+                #{newsTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="newsCoverImg != null">
+                #{newsCoverImg,jdbcType=VARCHAR},
+            </if>
+            <if test="tag != null">
+                #{tag,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="newsContent != null">
+                #{newsContent,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.output.entity.News">
         update output_news
-        set news_name = #{newsTitle,jdbcType=VARCHAR},
+        set news_Title = #{newsTitle,jdbcType=VARCHAR},
             news_cover_img = #{newsCoverImg,jdbcType=VARCHAR},
             tag = #{tag,jdbcType=VARCHAR},
             create_time = #{createTime,jdbcType=TIMESTAMP},
-            update_time = #{updateTime,jdbcType=TIMESTAMP}
+            update_time = #{updateTime,jdbcType=TIMESTAMP},
             news_content = #{newsContent,jdbcType=LONGVARCHAR}
         where news_id = #{newsId,jdbcType=BIGINT}
     </update>
-
+    <update id="updateByPrimaryKeySelective" parameterType="com.output.entity.News">
+        update output_news
+        <set>
+            <if test="newsTitle != null">
+                news_title = #{newsTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="newsCoverImg != null">
+                news_cover_img = #{newsCoverImg,jdbcType=VARCHAR},
+            </if>
+            <if test="tag != null">
+                tag = #{tag,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="newsContent != null">
+                news_content = #{newsContent,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where news_id = #{newsId,jdbcType=BIGINT}
+    </update>
     <select id="getTotalNews" parameterType="Map" resultType="int">
         select count(*) from output_news
         <where>

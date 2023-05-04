@@ -36,4 +36,12 @@ public interface NewsService {
      * @return
      */
     News getNewsById(Long id);
+
+    /**
+     * 删除动态
+     *
+     * @param id
+     * @return
+     */
+    String deleteNews(Long id);
 }
