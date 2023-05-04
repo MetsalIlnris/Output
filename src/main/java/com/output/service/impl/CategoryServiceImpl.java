@@ -82,20 +82,6 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public SearchPageCategoryVO getCategoriesForSearch(Long categoryId) {
-//        SearchPageCategoryVO searchPageCategoryVO = new SearchPageCategoryVO();
-//        GoodsCategory thirdLevelGoodsCategory = goodsCategoryMapper.selectByPrimaryKey(categoryId);
-//        if (thirdLevelGoodsCategory != null && thirdLevelGoodsCategory.getCategoryLevel() == CategoryLevelEnum.LEVEL_THREE.getLevel()) {
-//            //获取当前三级分类的二级分类
-//            GoodsCategory secondLevelGoodsCategory = goodsCategoryMapper.selectByPrimaryKey(thirdLevelGoodsCategory.getParentId());
-//            if (secondLevelGoodsCategory != null && secondLevelGoodsCategory.getCategoryLevel() == CategoryLevelEnum.LEVEL_TWO.getLevel()) {
-//                //获取当前二级分类下的三级分类List
-//                List<GoodsCategory> thirdLevelCategories = goodsCategoryMapper.selectByLevelAndParentIdsAndNumber(Collections.singletonList(secondLevelGoodsCategory.getCategoryId()), NewBeeMallCategoryLevelEnum.LEVEL_THREE.getLevel(), Constants.SEARCH_CATEGORY_NUMBER);
-//                searchPageCategoryVO.setCurrentCategoryName(thirdLevelGoodsCategory.getCategoryName());
-//                searchPageCategoryVO.setSecondLevelCategoryName(secondLevelGoodsCategory.getCategoryName());
-//                searchPageCategoryVO.setThirdLevelCategoryList(thirdLevelCategories);
-//                return searchPageCategoryVO;
-//            }
-//        }
         return null;
     }
 

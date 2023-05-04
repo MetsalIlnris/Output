@@ -53,7 +53,7 @@ public class OrderController {
         return ResultGenerator.genSuccessResult(orderService.getMyOrders(pageUtil));
     }
 
-    @GetMapping("/saveCartOrder")
+    @PostMapping("/saveCartOrder")
     @ResponseBody
     public Result saveOrder(@RequestBody UserVO userInfo) {
         List<ShoppingCartItemVO> myShoppingCartItems = shoppingCartService.getMyShoppingCartItems(userInfo.getUserId());

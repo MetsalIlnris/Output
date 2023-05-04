@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.output.dao.NewsMapper">
+    <resultMap id="BaseResultMap" type="com.output.entity.News">
+        <id column="news_id" jdbcType="BIGINT" property="newsId"/>
+        <result column="news_title" jdbcType="VARCHAR" property="newsTitle"/>
+        <result column="news_cover_img" jdbcType="VARCHAR" property="newsCoverImg"/>
+        <result column="tag" jdbcType="VARCHAR" property="tag"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.output.entity.News">
+        <result column="news_content" jdbcType="LONGVARCHAR" property="newsContent"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        news_id,news_title,news_cover_img,tag,create_time,update_time
+    </sql>
+    <sql id="Blob_Column_List">
+        news_content
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from output_news
+        where news_id = #{newsId,jdbcType=BIGINT}
+    </select>
+
+    <select id="findNewsList" parameterType="Map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from output_news
+        <where>
+            <if test="newsName!=null and newsName!=''">
+                and news_name like CONCAT('%','#{newsName}','%')
+            </if>
+            <if test="startTime != null and startTime.trim() != ''">
+                and create_time &gt; #{startTime}
+            </if>
+            <if test="endTime != null and endTime.trim() != ''">
+                and create_time &lt; #{endTime}
+            </if>
+        </where>
+        order by news_id desc
+        <if test="start!=null and limit!=null">
+            limit #{start},#{limit}
+        </if>
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from output_news
+        where news_id = #{newsId,jdbcType=BIGINT}
+    </delete>
+
+    <insert id="insert" parameterType="com.output.entity.News">
+        insert into output_news (news_id, news_title,
+                                    news_cover_img,  tag,
+                                    create_time,update_time, news_content
+        )
+        values (#{newsId,jdbcType=BIGINT}, #{newsTitle,jdbcType=VARCHAR},
+                #{newsCoverImg,jdbcType=VARCHAR},  #{tag,jdbcType=VARCHAR},
+                #{createTime,jdbcType=TIMESTAMP},
+                #{updateTime,jdbcType=TIMESTAMP}, #{newsContent,jdbcType=LONGVARCHAR}
+               )
+    </insert>
+    <update id="updateByPrimaryKey" parameterType="com.output.entity.News">
+        update output_news
+        set news_name = #{newsTitle,jdbcType=VARCHAR},
+            news_cover_img = #{newsCoverImg,jdbcType=VARCHAR},
+            tag = #{tag,jdbcType=VARCHAR},
+            create_time = #{createTime,jdbcType=TIMESTAMP},
+            update_time = #{updateTime,jdbcType=TIMESTAMP}
+            news_content = #{newsContent,jdbcType=LONGVARCHAR}
+        where news_id = #{newsId,jdbcType=BIGINT}
+    </update>
+
+    <select id="getTotalNews" parameterType="Map" resultType="int">
+        select count(*) from output_news
+        <where>
+            <if test="newsTitle!=null and newsTitle!=''">
+                and news_name like CONCAT('%','#{newsTitle}','%')
+            </if>
+            <if test="startTime != null and startTime.trim() != ''">
+                and create_time &gt; #{startTime}
+            </if>
+            <if test="endTime != null and endTime.trim() != ''">
+                and create_time &lt; #{endTime}
+            </if>
+        </where>
+    </select>
+</mapper>
