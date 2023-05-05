@@ -346,6 +346,8 @@ public class OrderServiceImpl implements OrderService {
 //            } else {
 //                return ServiceResultEnum.DB_ERROR.getResult();
 //            }
+            //下面两行将不会恢复库存
+            orderMapper.closeOrder(Collections.singletonList(Order.getOrderId()),OrderStatusEnum.ORDER_CLOSED_BY_MALLUSER.getOrderStatus());
             return ServiceResultEnum.SUCCESS.getResult();
         }
         return ServiceResultEnum.ORDER_NOT_EXIST_ERROR.getResult();

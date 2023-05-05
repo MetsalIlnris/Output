@@ -21,8 +21,6 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Map;
 
@@ -95,20 +93,6 @@ public class OrderController {
     @GetMapping("/selectPayType")
     @ResponseBody
     public Result selectPayType( @RequestParam("orderNo") String orderNo, @RequestParam("userId") Long userId) {
-        Order Order = orderService.getOrderByOrderNo(orderNo);
-        //判断订单userId
-        if (!userId.equals(Order.getUserId())) {
-            Exception.fail(ServiceResultEnum.NO_PERMISSION_ERROR.getResult());
-        }
-        //判断订单状态
-        if (Order.getOrderStatus().intValue() != OrderStatusEnum.ORDER_PRE_PAY.getOrderStatus()) {
-            Exception.fail(ServiceResultEnum.ORDER_STATUS_ERROR.getResult());
-        }
-        return ResultGenerator.genSuccessResult();
-    }
-
-    @GetMapping("/pay")
-    public Result payOrder(@RequestParam("orderNo") String orderNo,@RequestParam("userId") Long userId) {
         Order order = orderService.getOrderByOrderNo(orderNo);
         //判断订单userId
         if (!userId.equals(order.getUserId())) {
@@ -118,8 +102,6 @@ public class OrderController {
         if (order.getOrderStatus().intValue() != OrderStatusEnum.ORDER_PRE_PAY.getOrderStatus()) {
             Exception.fail(ServiceResultEnum.ORDER_STATUS_ERROR.getResult());
         }
-//        request.setAttribute("orderNo", orderNo);
-//        request.setAttribute("totalPrice", order.getTotalPrice());
         return ResultGenerator.genSuccessResult(order.getTotalPrice());
     }
 
