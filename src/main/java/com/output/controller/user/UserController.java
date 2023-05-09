@@ -1,7 +1,6 @@
 package com.output.controller.user;
 import cn.hutool.captcha.CaptchaUtil;
 import cn.hutool.captcha.ShearCaptcha;
-import com.output.common.Constants;
 import com.output.common.ServiceResultEnum;
 import com.output.controller.vo.UserVO;
 import com.output.entity.User;
@@ -16,10 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import static com.output.common.Constants.MALL_USER_SESSION_KEY;
-
 @Controller
 public class UserController {
 

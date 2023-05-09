@@ -2,9 +2,6 @@ package com.output.util;
 
 import java.net.URI;
 
-/**
- * @author 13
- */
 public class OtherUtils {
 
     public static URI getHost(URI uri) {
