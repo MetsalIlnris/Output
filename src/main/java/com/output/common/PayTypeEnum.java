@@ -31,15 +31,9 @@ public enum PayTypeEnum {
         return payType;
     }
 
-    public void setPayType(int payType) {
-        this.payType = payType;
-    }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 }

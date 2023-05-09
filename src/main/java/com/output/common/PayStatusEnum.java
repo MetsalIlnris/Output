@@ -29,15 +29,4 @@ public enum PayStatusEnum {
         return payStatus;
     }
 
-    public void setPayStatus(int payStatus) {
-        this.payStatus = payStatus;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 }
