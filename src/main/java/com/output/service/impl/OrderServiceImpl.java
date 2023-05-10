@@ -72,13 +72,13 @@ public class OrderServiceImpl implements OrderService {
         List<Order> orders = orderMapper.selectByPrimaryKeys(Arrays.asList(ids));
         String errorOrderNos = "";
         if (!CollectionUtils.isEmpty(orders)) {
-            for (Order Order : orders) {
-                if (Order.getIsDeleted() == 1) {
-                    errorOrderNos += Order.getOrderNo() + " ";
+            for (Order order : orders) {
+                if (order.getIsDeleted() == 1) {
+                    errorOrderNos += order.getOrderNo() + " ";
                     continue;
                 }
-                if (Order.getOrderStatus() != 1) {
-                    errorOrderNos += Order.getOrderNo() + " ";
+                if (order.getOrderStatus() != 1) {
+                    errorOrderNos += order.getOrderNo() + " ";
                 }
             }
             if (!StringUtils.hasText(errorOrderNos)) {
