@@ -25,7 +25,7 @@ public class AdminGoodsController {
     /**
      * 添加
      */
-    @RequestMapping(value = "/goods/save", method = RequestMethod.POST)
+    @PostMapping(value = "/goods/save")
     @ResponseBody
     public Result save(@RequestBody Goods Goods) {
         if (!StringUtils.hasText(Goods.getGoodsName())
@@ -38,7 +38,7 @@ public class AdminGoodsController {
                 || Objects.isNull(Goods.getGoodsSellStatus())
                 || !StringUtils.hasText(Goods.getGoodsCoverImg())
                 || !StringUtils.hasText(Goods.getGoodsDetailContent())) {
-            return ResultGenerator.genFailResult("参数异常！");
+            return ResultGenerator.genFailResult(Constants.PARAMETER_ERROR);
         }
         String result = goodsService.saveGoods(Goods);
         if (ServiceResultEnum.SUCCESS.getResult().equals(result)) {
@@ -52,7 +52,7 @@ public class AdminGoodsController {
     /**
      * 修改
      */
-    @RequestMapping(value = "/goods/update", method = RequestMethod.POST)
+    @PostMapping(value = "/goods/update")
     @ResponseBody
     public Result update(@RequestBody Goods Goods) {
         if (Objects.isNull(Goods.getGoodsId())
@@ -89,7 +89,7 @@ public class AdminGoodsController {
     /**
      * 批量修改销售状态
      */
-    @RequestMapping(value = "/goods/status/{sellStatus}", method = RequestMethod.PUT)
+    @PostMapping(value = "/goods/status/{sellStatus}")
     @ResponseBody
     public Result delete(@RequestBody Long[] ids, @PathVariable("sellStatus") int sellStatus) {
         if (ids.length < 1) {

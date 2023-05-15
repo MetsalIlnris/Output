@@ -12,6 +12,8 @@ public class Constants {
 
     public final static String MALL_VERIFY_CODE_KEY = "mallVerifyCode";//验证码key
 
+    public final static String PARAMETER_ERROR = "参数异常！";
+
     public final static String MALL_USER_SESSION_KEY = "userId";//session中user的key
 
     public final static int GOODS_SEARCH_PAGE_LIMIT = 10;//搜索分页的默认条数(每页10条)

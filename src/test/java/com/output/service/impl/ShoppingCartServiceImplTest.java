@@ -26,80 +26,80 @@ import static org.junit.jupiter.api.Assertions.*;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 class ShoppingCartServiceImplTest {
 
-//    @Autowired
-//    ShoppingCartService shoppingCartService;
-//
-//    @Autowired
-//    ShoppingCartItemMapper shoppingCartItemMapper;
-//
-//    ShoppingCartItem shoppingCartItemLocal = new ShoppingCartItem();
-//
-//
-//
-//    @Test
-//    void Test_Cart_001() {
-//        //saveCartItem
-//        shoppingCartItemLocal.setGoodsId((long) 10003);
-//        shoppingCartItemLocal.setGoodsCount(4);
-//        shoppingCartItemLocal.setCartItemId((long) 100);
-//        shoppingCartItemLocal.setUserId((long) 1);
-//        shoppingCartService.saveCartItem(shoppingCartItemLocal);
-//        Assert.assertEquals(shoppingCartItemMapper.selectByPrimaryKey((long) 100).getGoodsId(),shoppingCartItemLocal.getGoodsId());
-//        Assert.assertEquals(shoppingCartItemMapper.selectByPrimaryKey((long) 100).getGoodsCount(),shoppingCartItemLocal.getGoodsCount());
-//        Assert.assertEquals(shoppingCartItemMapper.selectByPrimaryKey((long) 100).getUserId(),shoppingCartItemLocal.getUserId());
-//    }
-//
-//    @Test
-//    void Test_Cart_002() {
-//        //getMyShoppingCartItems
-//        List<ShoppingCartItemVO> list = shoppingCartService.getMyShoppingCartItems((long) 1);
-//        ShoppingCartItemVO shoppingCartItemVOcac = new ShoppingCartItemVO();
-//        for (ShoppingCartItemVO VO : list) {
-//            if (VO.getCartItemId().equals((long) 100)) {
-//                shoppingCartItemVOcac = VO;
-//                break;
-//            }
-//        }
-//        Assert.assertNotNull(shoppingCartItemVOcac);
-//        Assert.assertEquals(shoppingCartItemMapper.selectByPrimaryKey((long) 100).getGoodsId(),shoppingCartItemVOcac.getGoodsId());
-//        Assert.assertEquals(shoppingCartItemMapper.selectByPrimaryKey((long) 100).getGoodsCount(),shoppingCartItemVOcac.getGoodsCount());
-//
-//
-//    }
-//
-//    @Test
-//    void Test_Cart_003() {
-//        //updateCartItem
-//        shoppingCartItemLocal.setGoodsId((long) 10003);
-//        shoppingCartItemLocal.setGoodsCount(5);
-//        shoppingCartItemLocal.setCartItemId((long) 100);
-//        shoppingCartItemLocal.setUserId((long) 1);
-//        shoppingCartService.updateCartItem(shoppingCartItemLocal);
-//        Assert.assertEquals(shoppingCartItemMapper.selectByPrimaryKey((long) 100).getGoodsCount(),shoppingCartItemLocal.getGoodsCount());
-//    }
-//
-//    @Test
-//    void Test_Cart_004() {
-//        //getCartItemById
-//        shoppingCartItemLocal.setCartItemId((long) 100);
-//        ShoppingCartItem target = shoppingCartService.getCartItemById(shoppingCartItemLocal.getCartItemId());
-//        ShoppingCartItem actual = shoppingCartItemMapper.selectByPrimaryKey(shoppingCartItemLocal.getCartItemId());
-//        Assert.assertEquals(target.getGoodsId(),actual.getGoodsId());
-//        Assert.assertEquals(target.getGoodsCount(),actual.getGoodsCount());
-//    }
-//
-//    @Test
-//    void Test_Cart_005() {
-//        //deleteById
-//        shoppingCartItemLocal.setCartItemId((long) 100);
-//        shoppingCartService.deleteById(shoppingCartItemLocal.getCartItemId());
-//        ShoppingCartItem target = shoppingCartService.getCartItemById(shoppingCartItemLocal.getCartItemId());
-//        Assert.assertNull(target);
-//    }
-//
-//    @Test
-//    void Test_Cart_006(){
-//
-//    }
+    @Autowired
+    ShoppingCartService shoppingCartService;
+
+    @Autowired
+    ShoppingCartItemMapper shoppingCartItemMapper;
+
+    ShoppingCartItem shoppingCartItemLocal = new ShoppingCartItem();
+
+
+
+    @Test
+    void Test_Cart_001() {
+        //saveCartItem
+        shoppingCartItemLocal.setGoodsId((long) 10003);
+        shoppingCartItemLocal.setGoodsCount(4);
+        shoppingCartItemLocal.setCartItemId((long) 100);
+        shoppingCartItemLocal.setUserId((long) 1);
+        shoppingCartService.saveCartItem(shoppingCartItemLocal);
+        Assert.assertEquals(shoppingCartItemMapper.selectByPrimaryKey((long) 100).getGoodsId(),shoppingCartItemLocal.getGoodsId());
+        Assert.assertEquals(shoppingCartItemMapper.selectByPrimaryKey((long) 100).getGoodsCount(),shoppingCartItemLocal.getGoodsCount());
+        Assert.assertEquals(shoppingCartItemMapper.selectByPrimaryKey((long) 100).getUserId(),shoppingCartItemLocal.getUserId());
+    }
+
+    @Test
+    void Test_Cart_002() {
+        //getMyShoppingCartItems
+        List<ShoppingCartItemVO> list = shoppingCartService.getMyShoppingCartItems((long) 1);
+        ShoppingCartItemVO shoppingCartItemVOcac = new ShoppingCartItemVO();
+        for (ShoppingCartItemVO VO : list) {
+            if (VO.getCartItemId().equals((long) 100)) {
+                shoppingCartItemVOcac = VO;
+                break;
+            }
+        }
+        Assert.assertNotNull(shoppingCartItemVOcac);
+        Assert.assertEquals(shoppingCartItemMapper.selectByPrimaryKey((long) 100).getGoodsId(),shoppingCartItemVOcac.getGoodsId());
+        Assert.assertEquals(shoppingCartItemMapper.selectByPrimaryKey((long) 100).getGoodsCount(),shoppingCartItemVOcac.getGoodsCount());
+
+
+    }
+
+    @Test
+    void Test_Cart_003() {
+        //updateCartItem
+        shoppingCartItemLocal.setGoodsId((long) 10003);
+        shoppingCartItemLocal.setGoodsCount(5);
+        shoppingCartItemLocal.setCartItemId((long) 100);
+        shoppingCartItemLocal.setUserId((long) 1);
+        shoppingCartService.updateCartItem(shoppingCartItemLocal);
+        Assert.assertEquals(shoppingCartItemMapper.selectByPrimaryKey((long) 100).getGoodsCount(),shoppingCartItemLocal.getGoodsCount());
+    }
+
+    @Test
+    void Test_Cart_004() {
+        //getCartItemById
+        shoppingCartItemLocal.setCartItemId((long) 100);
+        ShoppingCartItem target = shoppingCartService.getCartItemById(shoppingCartItemLocal.getCartItemId());
+        ShoppingCartItem actual = shoppingCartItemMapper.selectByPrimaryKey(shoppingCartItemLocal.getCartItemId());
+        Assert.assertEquals(target.getGoodsId(),actual.getGoodsId());
+        Assert.assertEquals(target.getGoodsCount(),actual.getGoodsCount());
+    }
+
+    @Test
+    void Test_Cart_005() {
+        //deleteById
+        shoppingCartItemLocal.setCartItemId((long) 100);
+        shoppingCartService.deleteById(shoppingCartItemLocal.getCartItemId());
+        ShoppingCartItem target = shoppingCartService.getCartItemById(shoppingCartItemLocal.getCartItemId());
+        Assert.assertNull(target);
+    }
+
+    @Test
+    void Test_Cart_006(){
+
+    }
 
 }

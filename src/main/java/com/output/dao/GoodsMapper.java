@@ -11,19 +11,19 @@ import java.util.List;
 public interface GoodsMapper {
     int deleteByPrimaryKey(Long goodsId);
 
-    int insert(Goods record);
+    int insert(Goods goodsRecord);
 
-    int insertSelective(Goods record);
+    int insertSelective(Goods goodsRecord);
 
     Goods selectByPrimaryKey(Long goodsId);
 
     Goods selectByCategoryIdAndName(@Param("goodsName") String goodsName, @Param("goodsCategoryId") Long goodsCategoryId);
 
-    int updateByPrimaryKeySelective(Goods record);
+    int updateByPrimaryKeySelective(Goods goodsRecord);
 
-    int updateByPrimaryKeyWithBLOBs(Goods record);
+    int updateByPrimaryKeyWithBLOBs(Goods goodsRecord);
 
-    int updateByPrimaryKey(Goods record);
+    int updateByPrimaryKey(Goods goodsRecord);
 
     List<Goods> findMallGoodsList(PageQueryUtil pageUtil);
 

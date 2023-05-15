@@ -1,6 +1,7 @@
 package com.output.controller.admin;
 
 
+import com.output.common.Constants;
 import com.output.common.ServiceResultEnum;
 import com.output.controller.vo.OrderItemVO;
 import com.output.entity.Order;
@@ -30,7 +31,7 @@ public class AdminOrderController {
     @ResponseBody
     public Result list(@RequestParam Map<String, Object> params) {
         if (ObjectUtils.isEmpty(params.get("page")) || ObjectUtils.isEmpty(params.get("limit"))) {
-            return ResultGenerator.genFailResult("参数异常！");
+            return ResultGenerator.genFailResult(Constants.PARAMETER_ERROR);
         }
         PageQueryUtil pageUtil = new PageQueryUtil(params);
         return ResultGenerator.genSuccessResult(orderService.getOrdersPage(pageUtil));
